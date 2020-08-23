@@ -10,7 +10,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         Scanner in = new Scanner(System.in);
         Boolean exit = false;
-        String[] inputs = new String[100];
+        Task[] tasks = new Task[100];
         int inputsIndex = 0;
 
         System.out.println("\t____________________________________________________________");
@@ -24,16 +24,29 @@ public class Duke {
                 exit = true;
             }else if(input.equals("list")){
                 System.out.println("\t____________________________________________________________");
-                for(int i = 0; i < inputsIndex; i++){
-                    System.out.println("\t " + (i+1) +". "+ inputs[i]);
+                System.out.println("\tHere are the tasks in your list:");
+                for(int i = 0; i < Task.getNumberOfTasks(); i++){
+                    System.out.println("\t " + (i+1) +".["+ tasks[i].getStatusIcon()+"] " + tasks[i].getDescription());
                 }
                 System.out.println("\t____________________________________________________________");
             }else{
-                inputs[inputsIndex] = input;
-                inputsIndex++;
-                System.out.println("\t____________________________________________________________");
-                System.out.println("\tadded: "+input);
-                System.out.println("\t____________________________________________________________");
+                input = input.trim();
+                if(input.contains("done ")){
+                    //Marks as done for task
+                    input = input.replace("done ","");
+                    int tasksIndex = Integer.parseInt(input) -1;
+                    tasks[tasksIndex].markAsDone();
+                    System.out.println("\t____________________________________________________________");
+                    System.out.println("\t Nice! I've marked this task as done: ");
+                    System.out.println("\t   ["+ tasks[tasksIndex].getStatusIcon()+"] "
+                            + tasks[tasksIndex].getDescription());
+                    System.out.println("\t____________________________________________________________");
+                }else {
+                    tasks[Task.getNumberOfTasks()] = new Task(input);
+                    System.out.println("\t____________________________________________________________");
+                    System.out.println("\tadded: " + input);
+                    System.out.println("\t____________________________________________________________");
+                }
             }
 
         }
