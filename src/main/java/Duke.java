@@ -26,7 +26,7 @@ public class Duke {
                 System.out.println("\t____________________________________________________________");
                 System.out.println("\tHere are the tasks in your list:");
                 for(int i = 0; i < Task.getNumberOfTasks(); i++){
-                    System.out.println("\t " + (i+1) +".["+ tasks[i].getStatusIcon()+"] " + tasks[i].getDescription());
+                    System.out.println("\t " + (i+1)+"." +tasks[i].toString());
                 }
                 System.out.println("\t____________________________________________________________");
             }else{
@@ -38,14 +38,28 @@ public class Duke {
                     tasks[tasksIndex].markAsDone();
                     System.out.println("\t____________________________________________________________");
                     System.out.println("\t Nice! I've marked this task as done: ");
-                    System.out.println("\t   ["+ tasks[tasksIndex].getStatusIcon()+"] "
-                            + tasks[tasksIndex].getDescription());
+                    System.out.println("\t   "+ tasks[tasksIndex].toString());
                     System.out.println("\t____________________________________________________________");
-                }else {
-                    tasks[Task.getNumberOfTasks()] = new Task(input);
-                    System.out.println("\t____________________________________________________________");
-                    System.out.println("\tadded: " + input);
-                    System.out.println("\t____________________________________________________________");
+                }else if(input.contains("todo ")){
+                    input = input.replace("todo ","");
+                    int currentTask = Task.getNumberOfTasks();
+                    tasks[currentTask] = new Todo(input);
+                    printTaskAddedMessage(tasks[currentTask].toString(), Task.getNumberOfTasks());
+
+                }else if(input.contains("deadline ")){
+                    input = input.replace("deadline ","");
+                    System.out.println(input);
+                    String[] inputParts = input.split("/by");
+                    int currentTask = Task.getNumberOfTasks();
+                    tasks[currentTask] = new Deadline(inputParts[0] , inputParts[1]);
+                    printTaskAddedMessage(tasks[currentTask].toString(), Task.getNumberOfTasks());
+
+                }else if(input.contains("event ")){
+                    input = input.replace("event ","");
+                    String[] inputParts = input.split("/at");
+                    int currentTask = Task.getNumberOfTasks();
+                    tasks[currentTask] = new Event(inputParts[0] , inputParts[1]);
+                    printTaskAddedMessage(tasks[currentTask].toString(), Task.getNumberOfTasks());
                 }
             }
 
@@ -57,4 +71,13 @@ public class Duke {
         System.out.println("\tBye. Hope to see you again soon!");
         System.out.println("\t____________________________________________________________");
     }
+
+    public static void printTaskAddedMessage(String taskToString, int numberOfTasks){
+        System.out.println("\t____________________________________________________________");
+        System.out.println("\t Got it. I've added this task:");
+        System.out.println("\t   "+ taskToString);
+        System.out.println("\t Now you have "+ numberOfTasks +" tasks in the list.");
+        System.out.println("\t____________________________________________________________");
+    }
+    
 }
