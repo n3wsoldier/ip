@@ -37,7 +37,7 @@ public class Duke {
                     int tasksIndex = Integer.parseInt(input) -1;
                     tasks[tasksIndex].markAsDone();
                     System.out.println("\t____________________________________________________________");
-                    System.out.println("\t Nice! I've marked this task as done: ");
+                    System.out.println("\t Nice! I've marked this task as done:");
                     System.out.println("\t   "+ tasks[tasksIndex].toString());
                     System.out.println("\t____________________________________________________________");
                 }else if(input.contains("todo ")){
@@ -48,15 +48,14 @@ public class Duke {
 
                 }else if(input.contains("deadline ")){
                     input = input.replace("deadline ","");
-                    System.out.println(input);
-                    String[] inputParts = input.split("/by");
+                    String[] inputParts = input.split(" /by ");
                     int currentTask = Task.getNumberOfTasks();
                     tasks[currentTask] = new Deadline(inputParts[0] , inputParts[1]);
                     printTaskAddedMessage(tasks[currentTask].toString(), Task.getNumberOfTasks());
 
                 }else if(input.contains("event ")){
                     input = input.replace("event ","");
-                    String[] inputParts = input.split("/at");
+                    String[] inputParts = input.split(" /at ");
                     int currentTask = Task.getNumberOfTasks();
                     tasks[currentTask] = new Event(inputParts[0] , inputParts[1]);
                     printTaskAddedMessage(tasks[currentTask].toString(), Task.getNumberOfTasks());
@@ -79,5 +78,5 @@ public class Duke {
         System.out.println("\t Now you have "+ numberOfTasks +" tasks in the list.");
         System.out.println("\t____________________________________________________________");
     }
-    
+
 }
