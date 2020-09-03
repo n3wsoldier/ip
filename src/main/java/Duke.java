@@ -4,7 +4,7 @@ public class Duke {
     private static final String LS = System.lineSeparator();
 
     /* Predetermined Message List */
-    private static final String MESSAGE_LOGO = " ____        _        \n"
+    private static final String MESSAGE_LOGO = " ____        _        "+LS
             + "|  _ \\ _   _| | _____ "+LS
             + "| | | | | | | |/ / _ \\"+LS
             + "| |_| | |_| |   <  __/"+LS
@@ -29,6 +29,7 @@ public class Duke {
     /* Command Separator Parameter List */
     private static final String PARAM_DELIMIT_BY = "/by";
     private static final String PARAM_DELIMIT_AT = "/at";
+    private static final int PARAM_DELIMIT_LIMIT = 2;
 
     private static Task[] tasks = new Task[100];
 
@@ -49,14 +50,23 @@ public class Duke {
         }
     }
 
+    /***
+     * Gets the next line input from the user
+     * @return input by the user
+     */
     private static String getUserInput() {
         return SCANNER.nextLine();
     }
 
+    /***
+     * Execute command base on the command of the user
+     * Command is determined by the first word in an input line
+     * @param userCommand: raw input line from user
+     */
     private static void executeCommand(String userCommand){
         //inputs[0] = command
         //inputs[2] = arguments
-        String[] inputs = userCommand.split(" ", 2);
+        String[] inputs = userCommand.split(" ", PARAM_DELIMIT_LIMIT);
         String command = inputs[0];
         switch (command){
         case COMMAND_LIST:
@@ -81,6 +91,9 @@ public class Duke {
         }
     }
 
+    /***
+     * list the task within the task manager
+     */
     private static void listTasks(){
         System.out.println(MESSAGE_LINE);
         System.out.println(MESSAGE_LIST);
@@ -90,13 +103,21 @@ public class Duke {
         System.out.println(MESSAGE_LINE);
     }
 
+    /***
+     * Add a Todo class into tasks list
+     * @param input: Description of todo task
+     */
     private static void addTodo(String input){
         int currentTask = Task.getNumberOfTasks();
         tasks[currentTask] = new Todo(input);
         printTaskAddedMessage(tasks[currentTask].toString(), Task.getNumberOfTasks());
     }
 
-
+    /***
+     * Add a Event class into tasks list
+     * Split the input to description and event time (delimit using /at)
+     * @param input: unprocessed description with event time
+     */
     private static void addEvent(String input){
         String[] inputParts = input.split(" "+ PARAM_DELIMIT_AT +" ");
         int currentTask = Task.getNumberOfTasks();
@@ -104,6 +125,11 @@ public class Duke {
         printTaskAddedMessage(tasks[currentTask].toString(), Task.getNumberOfTasks());
     }
 
+    /***
+     * Add a deadline class into tasks list
+     * Split the input to description and deadline time (delimit using /by)
+     * @param input: unprocessed description with deadline
+     */
     private static void addDeadline(String input){
         String[] inputParts = input.split(" "+ PARAM_DELIMIT_BY +" ");
         int currentTask = Task.getNumberOfTasks();
@@ -111,6 +137,9 @@ public class Duke {
         printTaskAddedMessage(tasks[currentTask].toString(), Task.getNumberOfTasks());
     }
 
+    /***
+     * Print Intro message
+     */
     private static void printIntroMessage(){
         System.out.println("Hello from"+ LS + MESSAGE_LOGO);
         System.out.println(MESSAGE_LINE);
@@ -118,18 +147,29 @@ public class Duke {
         System.out.println(MESSAGE_LINE);
     }
 
+    /***
+     * Print Exit message
+     */
     private static void printExitMessage(){
         System.out.println(MESSAGE_LINE);
         System.out.println(MESSAGE_EXIT);
         System.out.println(MESSAGE_LINE);
     }
 
+    /***
+     * Set specified task index as done and printTaskDoneMessage
+     * @param input: task index to complete
+     */
     private static void setTaskDone(String input){
         int tasksIndex = Integer.parseInt(input) -1;
         tasks[tasksIndex].markAsDone();
         printTaskDoneMessage(tasks[tasksIndex].toString());
     }
 
+    /***
+     * Print task done message
+     * @param taskToString: toString of the task
+     */
     private static void printTaskDoneMessage(String taskToString){
         System.out.println(MESSAGE_LINE);
         System.out.println(MESSAGE_DONE);
@@ -137,6 +177,11 @@ public class Duke {
         System.out.println(MESSAGE_LINE);
     }
 
+    /***
+     * Print message when a new task is added into task manager
+     * @param taskToString: toString of of task
+     * @param numberOfTasks: the Task.numberOfTasks
+     */
     private static void printTaskAddedMessage(String taskToString, int numberOfTasks){
         System.out.println(MESSAGE_LINE);
         System.out.println(MESSAGE_TASK_ADDED);
