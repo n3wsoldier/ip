@@ -1,7 +1,9 @@
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 
 import java.util.Scanner;
@@ -117,7 +119,7 @@ public class Duke {
     }
 
     /***
-     * Add a task.Todo class into tasks list
+     * Add a Todo class into tasks list
      * @param input: Description of todo task
      */
     private static void addTodo(String input){
@@ -127,7 +129,7 @@ public class Duke {
     }
 
     /***
-     * Add a task.Event class into tasks list
+     * Add a Event class into tasks list
      * Split the input to description and event time (delimit using /at)
      * @param input: unprocessed description with event time
      */
@@ -204,7 +206,7 @@ public class Duke {
     /***
      * Print message when a new task is added into task manager
      * @param taskToString: toString of of task
-     * @param numberOfTasks: the task.Task.numberOfTasks
+     * @param numberOfTasks: the numberOfTasks
      */
     private static void printTaskAddedMessage(String taskToString, int numberOfTasks){
         System.out.println(MESSAGE_LINE);
