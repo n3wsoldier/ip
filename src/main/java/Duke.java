@@ -9,14 +9,14 @@ public class Duke {
             + "| | | | | | | |/ / _ \\"+LS
             + "| |_| | |_| |   <  __/"+LS
             + "|____/ \\__,_|_|\\_\\___|"+LS;
-    private static final String MESSAGE_INTRO = "\tHello! I'm Duke"
-            + LS +"\tWhat can I do for you?";
-    private static final String MESSAGE_EXIT = "\tBye. Hope to see you again soon!";
+    private static final String MESSAGE_INTRO = "\t Hello! I'm Duke"
+            + LS +"\t What can I do for you?";
+    private static final String MESSAGE_EXIT = "\t Bye. Hope to see you again soon!";
     private static final String MESSAGE_DONE = "\t Nice! I've marked this task as done:";
     private static final String MESSAGE_TASK_ADDED = "\t Got it. I've added this task:";
-    private static final String MESSAGE_LIST = "\tHere are the tasks in your list:";
-    private static final String MESSAGE_LINE = "\t____________________________________________________________";
-
+    private static final String MESSAGE_LIST = "\t Here are the tasks in your list:";
+    private static final String MESSAGE_LINE = "\t__________________________________________________________________________________________";
+    private static final String MESSAGE_INVALID_COMMAND_ERROR = "\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     /* Command List */
     private static final String COMMAND_LIST = "list";
@@ -27,8 +27,8 @@ public class Duke {
     private static final String COMMAND_EXIT = "bye";
 
     /* Command Separator Parameter List */
-    private static final String PARAM_DELIMIT_BY = "/by";
-    private static final String PARAM_DELIMIT_AT = "/at";
+    private static final String PARAM_DELIMIT_BY = " /by ";
+    private static final String PARAM_DELIMIT_AT = " /at ";
     private static final int PARAM_DELIMIT_LIMIT = 2;
 
     private static Task[] tasks = new Task[100];
@@ -65,29 +65,36 @@ public class Duke {
      */
     private static void executeCommand(String userCommand){
         //inputs[0] = command
-        //inputs[2] = arguments
-        String[] inputs = userCommand.split(" ", PARAM_DELIMIT_LIMIT);
+        //inputs[1] = arguments
+        String[] inputs = splitInput(userCommand, " ");
         String command = inputs[0];
-        switch (command){
-        case COMMAND_LIST:
-            listTasks();
-            break;
-        case COMMAND_TODO:
-            addTodo(inputs[1]);
-            break;
-        case COMMAND_DEADLINE:
-            addDeadline(inputs[1]);
-            break;
-        case COMMAND_EVENT:
-            addEvent(inputs[1]);
-            break;
-        case COMMAND_DONE:
-            setTaskDone(inputs[1]);
-            break;
-        case COMMAND_EXIT:
-            printExitMessage();
-            System.exit(0);
-            break;
+        try {
+            switch (command) {
+            case COMMAND_LIST:
+                listTasks();
+                break;
+            case COMMAND_TODO:
+                addTodo(inputs[1]);
+                break;
+            case COMMAND_DEADLINE:
+                addDeadline(inputs[1]);
+                break;
+            case COMMAND_EVENT:
+                addEvent(inputs[1]);
+                break;
+            case COMMAND_DONE:
+                setTaskDone(inputs[1]);
+                break;
+            case COMMAND_EXIT:
+                printExitMessage();
+                System.exit(0);
+                break;
+            default:
+                printInvalidCommandMessage();
+                break;
+            }
+        }catch (ArrayIndexOutOfBoundsException e){
+            printEmptyDescriptionMessage(command);
         }
     }
 
@@ -104,7 +111,7 @@ public class Duke {
     }
 
     /***
-     * Add a Todo class into tasks list
+     * Add a task.Todo class into tasks list
      * @param input: Description of todo task
      */
     private static void addTodo(String input){
@@ -114,15 +121,20 @@ public class Duke {
     }
 
     /***
-     * Add a Event class into tasks list
+     * Add a task.Event class into tasks list
      * Split the input to description and event time (delimit using /at)
      * @param input: unprocessed description with event time
      */
     private static void addEvent(String input){
-        String[] inputParts = input.split(" "+ PARAM_DELIMIT_AT +" ");
-        int currentTask = Task.getNumberOfTasks();
-        tasks[currentTask] = new Event(inputParts[0] , inputParts[1]);
-        printTaskAddedMessage(tasks[currentTask].toString(), Task.getNumberOfTasks());
+
+        try {
+            String[] inputParts = splitInput(input, PARAM_DELIMIT_AT);
+            int currentTask = Task.getNumberOfTasks();
+            tasks[currentTask] = new Event(inputParts[0] , inputParts[1]);
+            printTaskAddedMessage(tasks[currentTask].toString(), Task.getNumberOfTasks());
+        }catch (ArrayIndexOutOfBoundsException e){
+            printInvalidDescriptionMessage("event", "event time");
+        }
     }
 
     /***
@@ -131,10 +143,16 @@ public class Duke {
      * @param input: unprocessed description with deadline
      */
     private static void addDeadline(String input){
-        String[] inputParts = input.split(" "+ PARAM_DELIMIT_BY +" ");
-        int currentTask = Task.getNumberOfTasks();
-        tasks[currentTask] = new Deadline(inputParts[0] , inputParts[1]);
-        printTaskAddedMessage(tasks[currentTask].toString(), Task.getNumberOfTasks());
+
+        try {
+            String[] inputParts = splitInput(input, PARAM_DELIMIT_BY);
+            int currentTask = Task.getNumberOfTasks();
+            tasks[currentTask] = new Deadline(inputParts[0], inputParts[1]);
+            printTaskAddedMessage(tasks[currentTask].toString(), Task.getNumberOfTasks());
+        }catch (ArrayIndexOutOfBoundsException e){
+            printInvalidDescriptionMessage("deadline", "deadline");
+        }
+
     }
 
     /***
@@ -180,7 +198,7 @@ public class Duke {
     /***
      * Print message when a new task is added into task manager
      * @param taskToString: toString of of task
-     * @param numberOfTasks: the Task.numberOfTasks
+     * @param numberOfTasks: the task.Task.numberOfTasks
      */
     private static void printTaskAddedMessage(String taskToString, int numberOfTasks){
         System.out.println(MESSAGE_LINE);
@@ -190,4 +208,26 @@ public class Duke {
         System.out.println(MESSAGE_LINE);
     }
 
+    private static String[] splitInput(String input, String delimiter){
+        String[] inputParts = input.split(delimiter,PARAM_DELIMIT_LIMIT);
+        return inputParts;
+    }
+
+    private static void printInvalidCommandMessage(){
+        System.out.println(MESSAGE_LINE);
+        System.out.println(MESSAGE_INVALID_COMMAND_ERROR);
+        System.out.println(MESSAGE_LINE);
+    }
+
+    private static void printEmptyDescriptionMessage(String command){
+        System.out.println(MESSAGE_LINE);
+        System.out.println("\t ☹ OOPS!!! The description of a "+command+" cannot be empty.");
+        System.out.println(MESSAGE_LINE);
+    }
+
+    private static void printInvalidDescriptionMessage(String command, String timeType){
+        System.out.println(MESSAGE_LINE);
+        System.out.println("\t ☹ OOPS!!! The description of " + command + " task cannot be without " + timeType + ".");
+        System.out.println(MESSAGE_LINE);
+    }
 }
