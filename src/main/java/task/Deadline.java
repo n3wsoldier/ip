@@ -1,8 +1,10 @@
+package task;
+
 public class Deadline extends Task {
     protected String by;
 
     public Deadline(String description, String by){
-        super(description, Type.Deadline);
+        super(description, TaskType.Deadline);
         this.by = by;
         this.toString();
 
