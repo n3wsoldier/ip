@@ -15,4 +15,18 @@ done 2
 list
 done 3
 list
+done 5
+list
+done 6
+list
+done 7
+list
+todo
+list
+deadline
+list
+event
+list
+deadline with description with no deadline
+event with description with no event time
 bye

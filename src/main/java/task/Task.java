@@ -1,14 +1,16 @@
+package task;
+
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected Type type;
+    protected TaskType taskType;
     private static int numberOfTasks = 0;
 
 
-    public Task(String description, Type type) {
+    public Task(String description, TaskType taskType) {
         this.description = description;
         this.isDone = false;
-        this.type = type;
+        this.taskType = taskType;
         numberOfTasks++;
     }
 

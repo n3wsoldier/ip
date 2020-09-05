@@ -1,8 +1,10 @@
+package task;
+
 public class Event extends Task {
     protected String at;
 
     public Event(String description, String at){
-        super(description , Type.Event);
+        super(description , TaskType.Event);
         this.at = at;
     }
 
