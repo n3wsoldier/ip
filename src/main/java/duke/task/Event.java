@@ -8,11 +8,11 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public String getBy(){
+    public String getAt(){
         return at;
     }
 
-    public void setBy(String by){
+    public void setAt(String by){
         this.at = at;
     }
 

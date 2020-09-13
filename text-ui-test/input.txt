@@ -4,6 +4,7 @@ event project meeting /at Aug 6th 2-4pm
 todo join sports club
 todo borrow book
 list
+<<<<<<< HEAD
 done 1
 done 2
 done 4
@@ -11,4 +12,7 @@ todo borrow book
 list
 delete 6
 list
+=======
+save duke.txt
+>>>>>>> branch-Level-7
 bye
