@@ -5,28 +5,10 @@ todo join sports club
 todo borrow book
 list
 done 1
+done 2
 done 4
 todo borrow book
 list
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+delete 6
 list
-done 2
-list
-done 3
-list
-done 5
-list
-done 6
-list
-done 7
-list
-todo
-list
-deadline
-list
-event
-list
-deadline with description with no deadline
-event with description with no event time
 bye

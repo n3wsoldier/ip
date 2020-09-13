@@ -5,7 +5,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -25,6 +25,7 @@ public class Duke {
     private static final String MESSAGE_LIST = "\t Here are the tasks in your list:";
     private static final String MESSAGE_LINE = "\t__________________________________________________________________________________________";
     private static final String MESSAGE_INVALID_COMMAND_ERROR = "\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String MESSAGE_DELETE = "\t Noted. I've removed this task:";
 
     /* Command List */
     private static final String COMMAND_LIST = "list";
@@ -33,13 +34,15 @@ public class Duke {
     private static final String COMMAND_DEADLINE = "deadline";
     private static final String COMMAND_EVENT = "event";
     private static final String COMMAND_EXIT = "bye";
+    private static final String COMMAND_DELETE = "delete";
 
     /* Command Separator Parameter List */
     private static final String PARAM_DELIMIT_BY = " /by ";
     private static final String PARAM_DELIMIT_AT = " /at ";
     private static final int PARAM_DELIMIT_LIMIT = 2;
 
-    private static Task[] tasks = new Task[100];
+    private static final ArrayList<Task> TASKS = new ArrayList<>();
+//    private static Task[] tasks = new Task[100];
 
     /*
      * This variable is declared for the whole class (instead of declaring it
@@ -93,10 +96,14 @@ public class Duke {
             case COMMAND_DONE:
                 setTaskDone(inputs[1]);
                 break;
+            case COMMAND_DELETE:
+                deleteTask(inputs[1]);
+                break;
             case COMMAND_EXIT:
                 printExitMessage();
                 System.exit(0);
                 break;
+
             default:
                 printInvalidCommandMessage();
                 break;
@@ -106,6 +113,13 @@ public class Duke {
         }
     }
 
+    private static void deleteTask(String input){
+        int tasksIndex = Integer.parseInt(input) -1;
+        String taskToString = TASKS.get(tasksIndex).toString();
+        TASKS.remove(tasksIndex);
+        printTaskDeleteMessage(TASKS.size(), taskToString);
+    }
+
     /***
      * list the task within the task manager
      */
@@ -113,7 +127,7 @@ public class Duke {
         System.out.println(MESSAGE_LINE);
         System.out.println(MESSAGE_LIST);
         for(int i = 0; i < Task.getNumberOfTasks(); i++){
-            System.out.println("\t " + (i+1)+"." +tasks[i].toString());
+            System.out.println("\t " + (i+1)+"." +TASKS.get(i).toString());
         }
         System.out.println(MESSAGE_LINE);
     }
@@ -124,8 +138,8 @@ public class Duke {
      */
     private static void addTodo(String input){
         int currentTask = Task.getNumberOfTasks();
-        tasks[currentTask] = new Todo(input);
-        printTaskAddedMessage(tasks[currentTask].toString(), Task.getNumberOfTasks());
+        TASKS.add( new Todo(input));
+        printTaskAddedMessage(TASKS.get(currentTask).toString(), Task.getNumberOfTasks());
     }
 
     /***
@@ -138,8 +152,8 @@ public class Duke {
         try {
             String[] inputParts = splitInput(input, PARAM_DELIMIT_AT);
             int currentTask = Task.getNumberOfTasks();
-            tasks[currentTask] = new Event(inputParts[0] , inputParts[1]);
-            printTaskAddedMessage(tasks[currentTask].toString(), Task.getNumberOfTasks());
+            TASKS.add( new Event(inputParts[0] , inputParts[1]));
+            printTaskAddedMessage(TASKS.get(currentTask).toString(), Task.getNumberOfTasks());
         }catch (ArrayIndexOutOfBoundsException e){
             printInvalidDescriptionMessage("event", "event time");
         }
@@ -155,8 +169,8 @@ public class Duke {
         try {
             String[] inputParts = splitInput(input, PARAM_DELIMIT_BY);
             int currentTask = Task.getNumberOfTasks();
-            tasks[currentTask] = new Deadline(inputParts[0], inputParts[1]);
-            printTaskAddedMessage(tasks[currentTask].toString(), Task.getNumberOfTasks());
+            TASKS.add( new Deadline(inputParts[0], inputParts[1]));
+            printTaskAddedMessage(TASKS.get(currentTask).toString(), Task.getNumberOfTasks());
         }catch (ArrayIndexOutOfBoundsException e){
             printInvalidDescriptionMessage("deadline", "deadline");
         }
@@ -188,8 +202,8 @@ public class Duke {
      */
     private static void setTaskDone(String input){
         int tasksIndex = Integer.parseInt(input) -1;
-        tasks[tasksIndex].markAsDone();
-        printTaskDoneMessage(tasks[tasksIndex].toString());
+        TASKS.get(tasksIndex).markAsDone();
+        printTaskDoneMessage(TASKS.get(tasksIndex).toString());
     }
 
     /***
@@ -236,6 +250,14 @@ public class Duke {
     private static void printInvalidDescriptionMessage(String command, String timeType){
         System.out.println(MESSAGE_LINE);
         System.out.println("\t ☹ OOPS!!! The description of " + command + " task cannot be without " + timeType + ".");
+        System.out.println(MESSAGE_LINE);
+    }
+
+    private static void printTaskDeleteMessage(int size, String toString){
+        System.out.println(MESSAGE_LINE);
+        System.out.println(MESSAGE_DELETE);
+        System.out.println("\t   "+toString);
+        System.out.println("\t Now you have "+ size +" tasks in the list.");
         System.out.println(MESSAGE_LINE);
     }
 }
