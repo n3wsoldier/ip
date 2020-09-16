@@ -29,9 +29,24 @@ public class Duke {
     private static final String MESSAGE_DONE = "\t Nice! I've marked this task as done:";
     private static final String MESSAGE_TASK_ADDED = "\t Got it. I've added this task:";
     private static final String MESSAGE_LIST = "\t Here are the tasks in your list:";
-    private static final String MESSAGE_LINE = "\t__________________________________________________________________________________________";
-    private static final String MESSAGE_INVALID_COMMAND_ERROR = "\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String MESSAGE_LINE = "\t___________________________________________________________________"
+            +"_______________________";
+    private static final String MESSAGE_INVALID_COMMAND_ERROR = "\t ☹ OOPS!!! I'm sorry,"
+            +" but I don't know what that means :-(";
     private static final String MESSAGE_DELETE = "\t Noted. I've removed this task:";
+    private static final String MESSAGE_HELP = "\t Command:"
+            + LS + "\t list: \t\t\t\t\t\t\t\t\tlist all the Tasks"
+            + LS + "\t done [Task Index]: \t\t\t\t\tComplete the task in the Task Manager \t\t\te.g. done 2"
+            + LS + "\t todo [Description]: \t\t\t\t\tAdd a Todo type task into the Task Manager \t\te.g. todo read book"
+            + LS + "\t deadline [Description] /by [Deadline]: Add a Deadline type task into the Task Manager \te.g. "
+            + "deadline return book /by June 6th"
+            + LS + "\t event [Description] /at [Event time]: \tAdd an Event type task into the Task Manager \te.g. "
+            + "event project meeting /at Aug 6th 2-4pm"
+            + LS + "\t delete [Task Index]: \t\t\t\t\tDelete the task \t\t\t\t\t\t\t\te.g. delete 3"
+            + LS + "\t save [file name]: \t\t\t\t\t\tSave the list in Task Manager to offline file \te.g. save duke.txt"
+            + LS + "\t load [file name]: \t\t\t\t\t\tLoad saved list into the Task Manager \t\t\te.g. load duke.txt"
+            + LS + "\t files: \t\t\t\t\t\t\t\tList all the file in data folder"
+            + LS + "\t bye: \t\t\t\t\t\t\t\t\tExit the program *we do not save for you on exit";
 
 
     /* Command List */
@@ -40,12 +55,14 @@ public class Duke {
     private static final String COMMAND_TODO = "todo";
     private static final String COMMAND_DEADLINE = "deadline";
     private static final String COMMAND_EVENT = "event";
-    private static final String COMMAND_EXIT = "bye";
     private static final String COMMAND_DELETE = "delete";
 
     private static final String COMMAND_SAVE = "save";
     private static final String COMMAND_LOAD = "load";
+    private static final String COMMAND_SAVED_FILES = "files";
 
+    private static final String COMMAND_HELP = "help";
+    private static final String COMMAND_EXIT = "bye";
     /* Symbol */
     private static final String SYMBOL_TODO = "T";
     private static final String SYMBOL_DEADLINE = "D";
@@ -91,7 +108,7 @@ public class Duke {
      * @return input by the user
      */
     private static String getUserInput() {
-        return SCANNER.nextLine();
+        return SCANNER.nextLine().trim();
     }
 
     /***
@@ -132,12 +149,20 @@ public class Duke {
                 writeToFile(inputs[1]);
                 break;
             case COMMAND_LOAD:
-
+                readFromFile(inputs[1]);
+                break;
+            case COMMAND_SAVED_FILES:
+                listSavedFiles();
+                break;
+            case COMMAND_HELP:
+                printHelpMessage();
                 break;
             default:
-                printInvalidCommandMessage();
-                break;
+                throw new DukeException();
             }
+        }catch (DukeException e){
+            printInvalidCommandMessage();
+
         }catch (ArrayIndexOutOfBoundsException e){
             printEmptyDescriptionMessage(command);
         }
@@ -162,7 +187,7 @@ public class Duke {
     private static void listTasks(){
         System.out.println(MESSAGE_LINE);
         System.out.println(MESSAGE_LIST);
-        for(int i = 0; i < Task.getNumberOfTasks(); i++){
+        for(int i = 0; i < TASKS.size(); i++){
             System.out.println("\t " + (i+1)+"." +TASKS.get(i).toString());
         }
         System.out.println(MESSAGE_LINE);
@@ -173,7 +198,7 @@ public class Duke {
      * @param input: Description of todo task
      */
     private static void addTodo(String input){
-        int currentTask = Task.getNumberOfTasks();
+        int currentTask = TASKS.size();
         TASKS.add( new Todo(input));
         printTaskAddedMessage(TASKS.get(currentTask).toString(), Task.getNumberOfTasks());
     }
@@ -187,9 +212,9 @@ public class Duke {
 
         try {
             String[] inputParts = splitInput(input, PARAM_DELIMIT_AT);
-            int currentTask = Task.getNumberOfTasks();
+            int currentTask = TASKS.size();
             TASKS.add( new Event(inputParts[0] , inputParts[1]));
-            printTaskAddedMessage(TASKS.get(currentTask).toString(), Task.getNumberOfTasks());
+            printTaskAddedMessage(TASKS.get(currentTask).toString(), TASKS.size());
         }catch (ArrayIndexOutOfBoundsException e){
             printInvalidDescriptionMessage("event", "event time");
         }
@@ -204,9 +229,9 @@ public class Duke {
 
         try {
             String[] inputParts = splitInput(input, PARAM_DELIMIT_BY);
-            int currentTask = Task.getNumberOfTasks();
+            int currentTask = TASKS.size();
             TASKS.add( new Deadline(inputParts[0], inputParts[1]));
-            printTaskAddedMessage(TASKS.get(currentTask).toString(), Task.getNumberOfTasks());
+            printTaskAddedMessage(TASKS.get(currentTask).toString(), TASKS.size());
         }catch (ArrayIndexOutOfBoundsException e){
             printInvalidDescriptionMessage("deadline", "deadline");
         }
@@ -299,6 +324,11 @@ public class Duke {
         System.out.println(MESSAGE_LINE);
     }
 
+    private static void printHelpMessage(){
+        System.out.println(MESSAGE_LINE);
+        System.out.println(MESSAGE_HELP);
+        System.out.println(MESSAGE_LINE);
+    }
     /* Print related Function End */
 
     /* Files related Function Start */
@@ -308,17 +338,17 @@ public class Duke {
      * @return
      */
     public static void readFromFile(String fileName){
-        File file = new File( fileName);
+        File file = new File(FILE_DIRECTORY+fileName);
         try {
             Scanner sc = new Scanner(file);
+            System.out.println(MESSAGE_LINE);
+            System.out.println("\t Loading saved file:");
             while(sc.hasNextLine()) {
                 String data = sc.nextLine();
-
+                loadSaveCommand(data);
             }
-
-
             sc.close();
-
+            System.out.println(MESSAGE_LINE);
         } catch (FileNotFoundException e) {
             System.out.println(MESSAGE_LINE);
             System.out.println("\t Unable to read " + file+ " as it does not exists.");
@@ -329,14 +359,19 @@ public class Duke {
 
     public static void listSavedFiles(){
         String[] pathnames = FOLDER.list();
-
+        System.out.println(MESSAGE_LINE);
+        System.out.println("\t Datafiles:");
+        int fileIndex = 0;
         for (String pathname : pathnames) {
-            System.out.println(pathname);
+            System.out.println("\t "+fileIndex+") "+ pathname);
+            fileIndex++;
         }
+        System.out.println(MESSAGE_LINE);
     }
 
     public static void writeToFile(String fileName) {
-        System.out.println(FILE_DIRECTORY + fileName);
+        System.out.println(MESSAGE_LINE);
+        System.out.println("\t Saving to :\""+FILE_DIRECTORY + fileName +"\""+ LS);
         if (!FOLDER.exists()) {
             FOLDER.mkdir();
         }
@@ -355,9 +390,11 @@ public class Duke {
                     taskSave = SYMBOL_EVENT + PARAM_DELIMIT_SAVE + isDone + PARAM_DELIMIT_SAVE + task.getDescription()
                             + PARAM_DELIMIT_SAVE +((Event) task).getAt();
                 }
+                System.out.println("\t "+ taskSave);
                 taskSave = taskSave + System.lineSeparator();
                 fileWriter.write(taskSave);
             }
+            System.out.println(MESSAGE_LINE);
             fileWriter.close();
         } catch (IOException e) {
             System.out.println(MESSAGE_LINE);
@@ -366,46 +403,37 @@ public class Duke {
         }
     }
 
-    private static void loadSaveCommand(String userCommand){
+    private static void loadSaveCommand(String saveCommand){
         //inputs[0] = command
         //inputs[1] = arguments
-        String[] inputs = splitInput(userCommand, " ");
-        String command = inputs[0];
-        try {
-            switch (command) {
-            case COMMAND_LIST:
-                listTasks();
-                break;
-            case COMMAND_TODO:
-                addTodo(inputs[1]);
-                break;
-            case COMMAND_DEADLINE:
-                addDeadline(inputs[1]);
-                break;
-            case COMMAND_EVENT:
-                addEvent(inputs[1]);
-                break;
-            case COMMAND_DONE:
-                setTaskDone(inputs[1]);
-                break;
-            case COMMAND_EXIT:
-                printExitMessage();
-                System.exit(0);
-                break;
-            case COMMAND_SAVE:
-                writeToFile(inputs[1]);
-                break;
-            case COMMAND_LOAD:
 
+        System.out.println("\t "+ saveCommand);
+
+        String[] inputs = saveCommand.split("\\s\\|\\s");
+        String command = inputs[0];
+        String description = inputs[2];
+        Task saveTask = null;
+        switch (command) {
+            case SYMBOL_TODO:
+                saveTask = new Todo(description);
                 break;
-            default:
-                printInvalidCommandMessage();
+            case SYMBOL_DEADLINE:
+                String by = inputs[3];
+                saveTask = new Deadline(description, by);
                 break;
-            }
-        }catch (ArrayIndexOutOfBoundsException e){
-            printEmptyDescriptionMessage(command);
+            case SYMBOL_EVENT:
+                String at = inputs[3];
+                saveTask = new Event(description, at);
+                break;
         }
+        String isDone = inputs[1];
+        if (isDone.equals("1")) {
+            saveTask.markAsDone();
+        }
+        TASKS.add(saveTask);
     }
+
+
     /* Files related Function End */
 
 }
