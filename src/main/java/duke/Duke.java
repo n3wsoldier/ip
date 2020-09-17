@@ -35,18 +35,23 @@ public class Duke {
             +" but I don't know what that means :-(";
     private static final String MESSAGE_DELETE = "\t Noted. I've removed this task:";
     private static final String MESSAGE_HELP = "\t Command:"
-            + LS + "\t list: \t\t\t\t\t\t\t\t\tlist all the Tasks"
-            + LS + "\t done [Task Index]: \t\t\t\t\tComplete the task in the Task Manager \t\t\te.g. done 2"
-            + LS + "\t todo [Description]: \t\t\t\t\tAdd a Todo type task into the Task Manager \t\te.g. todo read book"
-            + LS + "\t deadline [Description] /by [Deadline]: Add a Deadline type task into the Task Manager \te.g. "
-            + "deadline return book /by June 6th"
-            + LS + "\t event [Description] /at [Event time]: \tAdd an Event type task into the Task Manager \te.g. "
-            + "event project meeting /at Aug 6th 2-4pm"
-            + LS + "\t delete [Task Index]: \t\t\t\t\tDelete the task \t\t\t\t\t\t\t\te.g. delete 3"
-            + LS + "\t save [file name]: \t\t\t\t\t\tSave the list in Task Manager to offline file \te.g. save duke.txt"
-            + LS + "\t load [file name]: \t\t\t\t\t\tLoad saved list into the Task Manager \t\t\te.g. load duke.txt"
-            + LS + "\t files: \t\t\t\t\t\t\t\tList all the file in data folder"
-            + LS + "\t bye: \t\t\t\t\t\t\t\t\tExit the program *we do not save for you on exit";
+            + LS + "\t list:                                     list all the Tasks"
+            + LS + "\t done [Task Index]:                        Complete the task in the Task Manager"
+            + "            e.g. done 2"
+            + LS + "\t todo [Description]:                       Add a Todo type task into the Task Manager"
+            + "       e.g. todo read book"
+            + LS + "\t deadline [Description] /by [Deadline]:    Add a Deadline type task into the Task Manager"
+            + "   e.g. deadline return book /by June 6th"
+            + LS + "\t event [Description] /at [Event time]:     Add an Event type task into the Task Manager"
+            + "     e.g. event project meeting /at Aug 6th 2-4pm"
+            + LS + "\t delete [Task Index]:                      Delete the task"
+            + "                                  e.g. delete 3"
+            + LS + "\t save [file name]:                         Save the list in Task Manager to offline file"
+            + "    e.g. save duke.txt"
+            + LS + "\t load [file name]:                         Load saved list into the Task Manager"
+            + "            e.g. load duke.txt"
+            + LS + "\t files:                                    List all the file in data folder"
+            + LS + "\t bye:                                      Exit the program *we do not save for you on exit";
 
 
     /* Command List */
@@ -342,7 +347,7 @@ public class Duke {
         try {
             Scanner sc = new Scanner(file);
             System.out.println(MESSAGE_LINE);
-            System.out.println("\t Loading saved file:");
+            System.out.println("\t Loading saved file:"+LS);
             while(sc.hasNextLine()) {
                 String data = sc.nextLine();
                 loadSaveCommand(data);
@@ -358,11 +363,14 @@ public class Duke {
     }
 
     public static void listSavedFiles(){
-        String[] pathnames = FOLDER.list();
+        if (!FOLDER.exists()) {
+            FOLDER.mkdir();
+        }
+        String[] pathNames = FOLDER.list();
         System.out.println(MESSAGE_LINE);
         System.out.println("\t Datafiles:");
-        int fileIndex = 0;
-        for (String pathname : pathnames) {
+        int fileIndex = 1;
+        for (String pathname : pathNames) {
             System.out.println("\t "+fileIndex+") "+ pathname);
             fileIndex++;
         }
@@ -379,20 +387,20 @@ public class Duke {
             FileWriter fileWriter = new FileWriter( FILE_DIRECTORY + fileName);
 
             for(Task task: TASKS){
-                String taskSave= "";
+                String taskSaveFormat= "";
                 int isDone = (task.isDone()) ? 1 : 0;
                 if (task instanceof Todo) {
-                    taskSave = SYMBOL_TODO + PARAM_DELIMIT_SAVE + isDone + PARAM_DELIMIT_SAVE + task.getDescription();
+                    taskSaveFormat = SYMBOL_TODO + PARAM_DELIMIT_SAVE + isDone + PARAM_DELIMIT_SAVE + task.getDescription();
                 } else if (task instanceof Deadline) {
-                    taskSave = SYMBOL_DEADLINE + PARAM_DELIMIT_SAVE + isDone + PARAM_DELIMIT_SAVE + task.getDescription()
+                    taskSaveFormat = SYMBOL_DEADLINE + PARAM_DELIMIT_SAVE + isDone + PARAM_DELIMIT_SAVE + task.getDescription()
                             + PARAM_DELIMIT_SAVE +((Deadline) task).getBy();
                 } else if (task instanceof Event) {
-                    taskSave = SYMBOL_EVENT + PARAM_DELIMIT_SAVE + isDone + PARAM_DELIMIT_SAVE + task.getDescription()
+                    taskSaveFormat = SYMBOL_EVENT + PARAM_DELIMIT_SAVE + isDone + PARAM_DELIMIT_SAVE + task.getDescription()
                             + PARAM_DELIMIT_SAVE +((Event) task).getAt();
                 }
-                System.out.println("\t "+ taskSave);
-                taskSave = taskSave + System.lineSeparator();
-                fileWriter.write(taskSave);
+                System.out.println("\t "+ taskSaveFormat);
+                taskSaveFormat = taskSaveFormat + System.lineSeparator();
+                fileWriter.write(taskSaveFormat);
             }
             System.out.println(MESSAGE_LINE);
             fileWriter.close();
@@ -414,14 +422,14 @@ public class Duke {
         String description = inputs[2];
         Task saveTask = null;
         switch (command) {
-            case SYMBOL_TODO:
+        case SYMBOL_TODO:
                 saveTask = new Todo(description);
                 break;
-            case SYMBOL_DEADLINE:
+        case SYMBOL_DEADLINE:
                 String by = inputs[3];
                 saveTask = new Deadline(description, by);
                 break;
-            case SYMBOL_EVENT:
+        case SYMBOL_EVENT:
                 String at = inputs[3];
                 saveTask = new Event(description, at);
                 break;
