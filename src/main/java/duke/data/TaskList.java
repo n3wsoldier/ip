@@ -96,5 +96,21 @@ public class TaskList {
         return saveContent;
     }
 
+    /***
+     * Return list with task that description have search phrase
+     * @param search : Keyword to search for in description
+     * @return
+     */
+    public ArrayList<Task> find(String search){
+        ArrayList<Task> searchList = new ArrayList<>();
+
+        for (int i = 0, j = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task.getDescription().contains(search)) {
+                searchList.add(task);
+            }
+        }
+        return searchList;
+    }
 
 }

@@ -44,6 +44,8 @@ public class Parser {
                 return new ExitCommand();
             case HelpCommand.COMMAND_HELP:
                 return new HelpCommand();
+            case FindCommand.COMMAND_FIND:
+                return new FindCommand(inputs[1]);
             default:
                 throw new InvalidCommandException();
             }
