@@ -5,7 +5,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
     public TaskType taskType;
-    private static int numberOfTasks = 0;
+
 
     /***
      * Task Constructor to be called by all subclass
@@ -17,7 +17,6 @@ public class Task {
         this.description = description;
         this.isDone = false;
         this.taskType = taskType;
-        numberOfTasks++;
     }
 
     /***
@@ -51,9 +50,8 @@ public class Task {
         return description;
     }
 
-
-    public static int getNumberOfTasks(){
-        return numberOfTasks;
+    public boolean isDateTime(){
+        return false;
     }
 
     /***
