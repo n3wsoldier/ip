@@ -5,14 +5,13 @@ public class Task {
     protected String description;
     protected boolean isDone;
     public TaskType taskType;
-    private static int numberOfTasks = 0;
+
 
 
     public Task(String description, TaskType taskType) {
         this.description = description;
         this.isDone = false;
         this.taskType = taskType;
-        numberOfTasks++;
     }
 
 
@@ -32,8 +31,8 @@ public class Task {
         return description;
     }
 
-    public static int getNumberOfTasks(){
-        return numberOfTasks;
+    public boolean isDateTime(){
+        return false;
     }
     
     @Override
