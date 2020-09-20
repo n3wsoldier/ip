@@ -2,7 +2,9 @@ package duke.ui;
 
 import duke.common.Messages;
 import duke.data.TaskList;
+import duke.data.task.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -140,5 +142,18 @@ public class Ui {
         System.out.println(Messages.MESSAGE_EMPTY_FILE);
     }
 
+
+    /***
+     * list the task within the task manager with search phrase
+     */
+    public static void printFindList(TaskList tasks, String toFind){
+        ArrayList<Task> findList = tasks.find(toFind);
+        System.out.println(Messages.MESSAGE_FIND + " "+findList.size() +" found");
+        int findIndex = 1;
+        for(Task t : findList){
+            System.out.println("\t " + findIndex +"." + t.toString());
+            findIndex++;
+        }
+    }
 
 }
