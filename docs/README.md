@@ -21,16 +21,16 @@ ________________________________________________________________________________
 ```
 ## Features 
 Duke can manage three type tasks:
-* *Todo*: tasks with only description
-* *Deadline*: tasks with description that need to be done before a specific date time
-* *Event*: tasks with description that start at a specific date time
+* Todo: tasks with only description
+* Deadline: tasks with description that need to be done before a specific date time
+* Event: tasks with description that start at a specific date time
 
 ### Adding a Todo task `todo`
 This will add a todo task to the task list
 
 Format: `todo [Description]`
-* *Add a Todo type task into task manager.*
-* *Description is string format and cannot be empty.*
+* Add a Todo type task into task manager.
+* Description is string format and cannot be empty.
 
 Example Input: `todo Buy groceries`
 
@@ -48,9 +48,9 @@ ________________________________________________________________________________
 This will add a deadline task to the task list
 
 Format: `deadline [Description] /by [Due Date]`
-* *Add a Deadline type task into task manager.*
-* *Description is string format and cannot be empty.*
-* *Due date can either be string or date format following [dd/mm/yyyy hhmm].*
+* Add a Deadline type task into task manager.
+* Description is string format and cannot be empty.
+* Due date can either be string or date format following [dd/mm/yyyy hhmm].
 
 Note: Additional search features will apply to due date with proper date format.
 
@@ -76,9 +76,9 @@ ________________________________________________________________________________
 This will add an event task to the task list
 
 Format: `event [Description] /at [Event Date]`
-* *Add a Event type task into task manager.*
-* *Description is string format and cannot be empty.*
-* *Event date can either be string or date format following [dd/mm/yyyy hhmm].*
+* Add a Event type task into task manager.
+* Description is string format and cannot be empty.
+* Event date can either be string or date format following [dd/mm/yyyy hhmm].
 
 Note: Additional search features will apply to event date with proper date format.
 
@@ -125,10 +125,10 @@ ________________________________________________________________________________
 Mark a task in task manager as completed
 
 Format: `done [Task Index]`
-* *Set the Task in task manager with the index as done.*
-* *Task Index is an integer and cannot be empty.*
-* *Task Index should within 1 to Number of tasks.*
-* *Task Index should not be a task that have been completed.*
+* Set the Task in task manager with the index as done.
+* Task Index is an integer and cannot be empty.
+* Task Index should within 1 to Number of tasks.
+* Task Index should not be a task that have been completed.
 
 Example Input: `done 3`
 
@@ -145,9 +145,9 @@ ________________________________________________________________________________
 Remove a task from the task list
 
 Format: `delete [Task Index]`
-* *Delete the task at Task Index*
-* *Task Index is an integer and cannot be empty.*
-* *Task Index should within 1 to Number of tasks.*
+* Delete the task at Task Index
+* Task Index is an integer and cannot be empty.
+* Task Index should within 1 to Number of tasks.
 
 Example Input: `delete 3`
 
@@ -165,8 +165,8 @@ ________________________________________________________________________________
 Searches and prints all tasks that has the search string in the task name
 
 Format: `find [Search Phrase]`
-* *Find all task with description containing search phrase.*
-* *Search Phrase is string and cannot be empty.*
+* Find all task with description containing search phrase.
+* Search Phrase is string and cannot be empty.
 
 Example Input: `find CS2113T`
 
@@ -183,8 +183,8 @@ ________________________________________________________________________________
 Searches and prints all tasks that has the specified date
 
 Format: `find [Date]`
-* *Find all task with Date.*
-* *Date follows [dd/mm/yyyy hhmm] formatting and cannot be empty.*
+* Find all task with Date.
+* Date follows [dd/mm/yyyy hhmm] formatting and cannot be empty.
 
 Example Input: `find  25/10/2020 1200`
 
@@ -200,8 +200,8 @@ ________________________________________________________________________________
 Searches and prints all tasks that is between start date and end date
 
 Format: `find [Start Date] /to [End date]`
-* *Find all task between start date and end date.*
-* *Both dates follows [dd/mm/yyyy hhmm] formatting and cannot be empty.*
+* Find all task between start date and end date.
+* Both dates follows [dd/mm/yyyy hhmm] formatting and cannot be empty.
 
 Example Input: `find 02/10/2020 2359 /to 25/10/2020 2359`
 
