@@ -6,6 +6,7 @@ Duke is an offline desktop app for managing tasks via a Command Line Interface (
 2. Download the latest `Duke.jar` from [here.]()
 3. Copy the file to the folder you want to use as the home folder for your Duke.
 4. Use command prompt to run the `Duke.jar` and you are ready.
+
 ```
 __________________________________________________________________________________________
  Hello from
