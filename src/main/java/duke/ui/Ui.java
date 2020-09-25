@@ -4,12 +4,15 @@ import duke.common.Messages;
 import duke.data.TaskList;
 import duke.data.task.Task;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Date;
 
 public class Ui {
 
     private final Scanner SCANNER = new Scanner(System.in);
+    private static SimpleDateFormat dateToString = new SimpleDateFormat("dd MMM yyyy hh:mmaa");
 
     /***
      * Gets the next line input from the user
@@ -23,7 +26,7 @@ public class Ui {
      * Print Intro message
      */
     public void showWelcome(){
-        System.out.println("Hello from"+ Messages.LS + Messages.MESSAGE_LOGO);
+        System.out.println(" Hello from"+ Messages.LS + Messages.MESSAGE_LOGO);
         System.out.println(Messages.MESSAGE_INTRO);
     }
 
@@ -39,7 +42,7 @@ public class Ui {
      * @param tasksSize
      */
     public void printLoadedMessage(int tasksSize){
-        System.out.println("\t "+tasksSize+ Messages.MESSAGE_LOADED);
+        System.out.println(" "+tasksSize+ Messages.MESSAGE_LOADED);
     }
 
     /***
@@ -54,19 +57,19 @@ public class Ui {
      * @param taskToString: toString of of task
      * @param numberOfTasks: the numberOfTasks
      */
-    public static void printTaskAddedMessage(String taskToString, int numberOfTasks){
+    public void printTaskAddedMessage(String taskToString, int numberOfTasks){
         System.out.println(Messages.MESSAGE_TASK_ADDED);
-        System.out.println("\t   "+ taskToString);
-        System.out.println("\t Now you have "+ numberOfTasks +" tasks in the list.");
+        System.out.println("   "+ taskToString);
+        System.out.println(" Now you have "+ numberOfTasks +" tasks in the list.");
     }
 
     /***
      * list the task within the task manager
      */
-    public static void printTaskList(TaskList tasks){
-        System.out.println(Messages.MESSAGE_LIST);
+    public void printTaskList(TaskList tasks, int totalTask, int completedTask){
+        System.out.println(Messages.MESSAGE_LIST +" "+ completedTask + "/" +totalTask +" completed");
         for(int i = 0; i < tasks.size(); i++){
-            System.out.println("\t " + (i+1)+"." + tasks.get(i).toString());
+            System.out.println("  " + (i+1)+"." + tasks.get(i).toString());
         }
     }
 
@@ -74,9 +77,22 @@ public class Ui {
      * Print task done message
      * @param taskToString: toString of the task
      */
-    public static void printTaskDoneMessage(String taskToString){
+    public static void printTaskDoneMessage(String taskToString, int totalTask, int completedTask){
         System.out.println(Messages.MESSAGE_DONE);
-        System.out.println("\t   "+ taskToString);
+        System.out.println("   "+ taskToString);
+        System.out.println(" You have completed: "+ completedTask + "/" + totalTask + ". "+
+                (totalTask - completedTask) + " left :)" );
+    }
+
+    /***
+     * Print task done message
+     * @param taskToString: toString of the task
+     */
+    public static void printTaskAlreadyDoneMessage(String taskToString, int totalTask, int completedTask){
+        System.out.println(Messages.MESSAGE_ALREADY_DONE);
+        System.out.println("   "+ taskToString);
+        System.out.println(" Currently completed: "+ completedTask + "/" + totalTask + ". "+
+                (totalTask - completedTask) + " left :)" );
     }
 
     /***
@@ -84,10 +100,10 @@ public class Ui {
      * @param size : remaining size
      * @param toString : the task to be deleted
      */
-    public static void printTaskDeleteMessage(int size, String toString){
+    public static void printTaskDeleteMessage( String toString, int completedTask, int totalTask){
         System.out.println(Messages.MESSAGE_DELETE);
-        System.out.println("\t   "+toString);
-        System.out.println("\t Now you have "+ size +" tasks in the list.");
+        System.out.println("   "+toString);
+        System.out.println(" Now you have "+ completedTask +"/"+ totalTask +" completed tasks in the list.");
     }
 
     /***
@@ -142,18 +158,49 @@ public class Ui {
         System.out.println(Messages.MESSAGE_EMPTY_FILE);
     }
 
+    public static void printIndexOutError(String command){
+        System.out.println(" Your \""+command+ "\" command failed.");
+        System.out.println(" That task does not exist... O.O");
+    }
+
 
     /***
      * list the task within the task manager with search phrase
      */
     public static void printFindList(TaskList tasks, String toFind){
         ArrayList<Task> findList = tasks.find(toFind);
-        System.out.println(Messages.MESSAGE_FIND + " "+findList.size() +" found");
+        System.out.println(Messages.MESSAGE_FIND +" \""+ toFind+"\": "+findList.size() +" found");
         int findIndex = 1;
         for(Task t : findList){
-            System.out.println("\t " + findIndex +"." + t.toString());
+            System.out.println("  " + findIndex +"." + t.toString());
             findIndex++;
         }
     }
 
+    /***
+     * list the task within the task manager with specific date
+     */
+    public static void printFindList(TaskList tasks, Date dateTime){
+        ArrayList<Task> findList = tasks.find(dateTime);
+        System.out.println(Messages.MESSAGE_FIND + " \""+ dateToString.format(dateTime) +"\": "+findList.size() +" found");
+        int findIndex = 1;
+        for(Task t : findList){
+            System.out.println("  " + findIndex +"." + t.toString());
+            findIndex++;
+        }
+    }
+
+    /***
+     * list the task within the task manager between startDate and endDate
+     */
+    public static void printFindList(TaskList tasks, Date startDate, Date endDate){
+        ArrayList<Task> findList = tasks.find(startDate, endDate);
+        System.out.println(Messages.MESSAGE_FIND + " \""+ dateToString.format(startDate) +"\" to \""
+                + dateToString.format(endDate) +"\": "+findList.size() +" found");
+        int findIndex = 1;
+        for(Task t : findList){
+            System.out.println("  " + findIndex +"." + t.toString());
+            findIndex++;
+        }
+    }
 }

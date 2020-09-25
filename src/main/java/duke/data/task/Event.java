@@ -38,6 +38,14 @@ public class Event extends Task implements DateTimeValidator{
     }
 
     /***
+     * Get due date
+     * @return
+     */
+    public Date getDate(){
+        return this.atDate;
+    }
+
+    /***
      * Format the way to print Event task
      * @return
      */

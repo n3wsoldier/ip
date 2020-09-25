@@ -1,5 +1,6 @@
 package duke.data;
 
+import duke.command.Command;
 import duke.data.storage.StorageManager;
 import duke.data.task.Deadline;
 import duke.data.task.Event;
@@ -9,10 +10,12 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 public class TaskList {
     /* Task Collection using ArrayList */
     public  ArrayList<Task> tasks ;
+    private int completedTask;
 
     /***
      * Create Tasklist with saved TaskList
@@ -20,6 +23,7 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> tasks){
         this.tasks = tasks;
+        this.completedTask = countCompletedTask();
     }
 
     /***
@@ -27,6 +31,29 @@ public class TaskList {
      */
     public TaskList(){
         this.tasks = new ArrayList<>();
+        completedTask = 0;
+    }
+
+    /***
+     * Count the number of completed task
+     * @return completeTask
+     */
+    public int countCompletedTask(){
+        int completeTask = 0;
+        for(Task task: tasks){
+            if(task.isDone()){
+                completeTask += 1;
+            }
+        }
+        return completeTask;
+    }
+
+    /***
+     * Get completed task
+     * @return completedTask
+     */
+    public int getCompletedTask(){
+        return completedTask;
     }
 
     /***
@@ -34,6 +61,7 @@ public class TaskList {
      * @param tasksIndex
      */
     public void deleteTask(int tasksIndex){
+        completedTask--;
         tasks.remove(tasksIndex);
     }
 
@@ -41,8 +69,14 @@ public class TaskList {
      * Set task with TaskIndex in Tasklist as done
      * @param tasksIndex
      */
-    public void setTaskDone(int tasksIndex){
-        tasks.get(tasksIndex).markAsDone();
+    public boolean setTaskDone(int tasksIndex){
+        if(tasks.get(tasksIndex).isDone()){
+            return false;
+        }else{
+            tasks.get(tasksIndex).markAsDone();
+            completedTask++;
+            return true;
+        }
     }
 
     /***
@@ -113,4 +147,43 @@ public class TaskList {
         return searchList;
     }
 
+    /***
+     * Return list with task that due date have the search date
+     * @param searchDate : Keyword to search for in description
+     * @return
+     */
+    public ArrayList<Task> find(Date searchDate){
+        ArrayList<Task> searchList = new ArrayList<>();
+
+        for (int i = 0, j = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task.isDateTime() && task.getDate().equals(searchDate)) {
+                searchList.add(task);
+            }
+        }
+        return searchList;
+    }
+
+    /***
+     * Return list with task that due date is after the start date and before the end date
+     * or either of the date
+     * @param startDate : Keyword to search for in description
+     * @param endDate : Keyword to search for in description
+     * @return
+     */
+    public ArrayList<Task> find(Date startDate, Date endDate){
+        ArrayList<Task> searchList = new ArrayList<>();
+
+        for (int i = 0, j = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task.isDateTime() && task.getDate().after(startDate) && task.getDate().before(endDate) ) {
+                searchList.add(task);
+            }else if(task.isDateTime()){
+                if(task.getDate().equals(startDate) || task.getDate().equals(endDate)){
+                    searchList.add(task);
+                }
+            }
+        }
+        return searchList;
+    }
 }

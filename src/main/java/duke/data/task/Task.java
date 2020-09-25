@@ -1,10 +1,12 @@
 package duke.data.task;
 
 
+import java.util.Date;
+
 public class Task {
     protected String description;
     protected boolean isDone;
-    public TaskType taskType;
+    protected TaskType taskType;
 
 
     /***
@@ -50,8 +52,20 @@ public class Task {
         return description;
     }
 
+    /***
+     * Return false by default unless deadline and Event have date duedate
+     * @return
+     */
     public boolean isDateTime(){
         return false;
+    }
+
+    /***
+     * Return null by default unless deadline and Event have date duedate
+     * @return
+     */
+    public Date getDate(){
+        return null;
     }
 
     /***

@@ -7,9 +7,9 @@ import duke.exception.InvalidCommandException;
 
 public class Parser {
 
-    public final int PARAM_DELIMIT_LIMIT = 2;
-    public final String PARAM_DELIMIT_BY = " /by ";
-    public final String PARAM_DELIMIT_AT = " /at ";
+    private static final int PARAM_DELIMIT_LIMIT = 2;
+    private final String PARAM_DELIMIT_BY = " /by ";
+    private final String PARAM_DELIMIT_AT = " /at ";
 
     /***
      * executeCommand to parse user input to command and arguments
@@ -116,7 +116,7 @@ public class Parser {
      * @param delimiter : what to split by
      * @return
      */
-    public String[] splitInput(String input, String delimiter){
+    public static String[] splitInput(String input, String delimiter){
         String[] inputParts = input.split(delimiter, PARAM_DELIMIT_LIMIT);
         return inputParts;
     }

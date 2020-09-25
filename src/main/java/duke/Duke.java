@@ -36,6 +36,7 @@ public class Duke {
         ui = new Ui();
         storage = new StorageManager(fileName);
         try {
+            ui.showLine();
             ui.printLoadingMessage();
             tasks = new TaskList(storage.load());
             ui.printLoadedMessage(tasks.size());

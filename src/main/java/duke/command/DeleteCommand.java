@@ -28,8 +28,14 @@ public class DeleteCommand extends Command{
      */
     @Override
     public void execute(TaskList tasks, Ui ui, StorageManager storage){
-        Ui.printTaskDeleteMessage(tasks.size()-1,tasks.get(toDelete).toString());
-        tasks.deleteTask(toDelete);
-        storage.save(tasks.toString());
+
+        try {
+            String toString = tasks.get(toDelete).toString();
+            tasks.deleteTask(toDelete);
+            Ui.printTaskDeleteMessage(toString, tasks.getCompletedTask(), tasks.size());
+            storage.save(tasks.toString());
+        }catch (IndexOutOfBoundsException e){
+            Ui.printIndexOutError("Delete");
+        }
     }
 }

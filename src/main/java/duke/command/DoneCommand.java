@@ -28,8 +28,17 @@ public class DoneCommand extends Command{
      */
     @Override
     public void execute(TaskList tasks, Ui ui, StorageManager storage){
-        tasks.setTaskDone(toDone);
-        Ui.printTaskDoneMessage(tasks.get(toDone).toString());
-        storage.save(tasks.toString());
+        try{
+        boolean success =tasks.setTaskDone(toDone);
+        if(success){
+            Ui.printTaskDoneMessage(tasks.get(toDone).toString(), tasks.size(), tasks.getCompletedTask() );
+            storage.save(tasks.toString());
+        }else{
+            Ui.printTaskAlreadyDoneMessage(tasks.get(toDone).toString() , tasks.size(), tasks.getCompletedTask() );
+
+        }}catch (IndexOutOfBoundsException e){
+            Ui.printIndexOutError("Done");
+        }
+
     }
 }

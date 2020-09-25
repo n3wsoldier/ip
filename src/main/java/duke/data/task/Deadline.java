@@ -38,6 +38,14 @@ public class Deadline extends Task implements DateTimeValidator {
     }
 
     /***
+     * Get due date
+     * @return
+     */
+    public Date getDate(){
+        return this.byDate;
+    }
+
+    /***
      * Format the way to print Deadline task
      * @return
      */
