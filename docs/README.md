@@ -179,7 +179,7 @@ ________________________________________________________________________________
 ```
 
 #### Find by Date
-Searches and prints all tasks that has the specified due date
+Searches and prints all tasks that has the specified date
 
 Format: `find [Date]`
 * *Find all task with Date.*
@@ -196,7 +196,7 @@ ________________________________________________________________________________
 ```
 
 #### Find between Dates
-Searches and prints all tasks that has the specified due date
+Searches and prints all tasks that is between start date and end date
 
 Format: `find [Start Date] /to [End date]`
 * *Find all task between start date and end date.*
