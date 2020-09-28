@@ -1,6 +1,28 @@
 # User Guide
 Duke is an offline desktop app for managing tasks via a Command Line Interface (CLI).
 
+## Table of Contents
+
+## Table of Contents
+* [Quick Start](#quick-start)
+* [Features](#features)
+    * [Task Management](#task-management)
+    * [Search Task](#search-task)
+    * [Persistent Storage](#persistent-storage)
+* [Usage](#usage)
+    * [Add a ToDo task `todo`](#add-a-todo-task-todo)
+    * [Add a Deadline task: `deadline`](#add-a-deadline-task-deadline)
+    * [Add an Event task: `event`](#add-an-event-task-event)
+    * [List all Tasks `list`](#list-all-tasks-list)
+    * [Complete a Task `done`](#complete-a-task-done)
+    * [Delete a task: `delete`](#delete-a-task-delete)
+    * [Find Task `find`](#find-task-find)
+        * [Find by Keyword](#find-by-keyword)
+        * [Find by Date](#find-by-date)
+        * [Find between Dates](#find-between-dates)
+    * [Exit the program `bye`](#exit-the-program-bye)
+
+
 ## Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Download the latest `Duke.jar` from [here.]()
@@ -19,14 +41,22 @@ ________________________________________________________________________________
  What can I do for you?
 __________________________________________________________________________________________
 ```
-## Features 
-Duke can manage three type tasks:
+## Features
+### Task Management
+Duke can manage three type of tasks:
 * Todo: tasks with only description
 * Deadline: tasks with description that need to be done before a specific date time
 * Event: tasks with description that start at a specific date time
 
-### Adding a Todo task `todo`
-This will add a todo task to the task list
+Duke supports the creation, deletion and completion of a task.
+### Search Task
+Built-in search features that aids in finding tasks with given description or due dates.
+### Persistent Storage
+Automatically saves changes made to task list and preload task list of previous session.
+
+## Usage
+### Add a ToDo task `todo`
+Adds a todo task to the task list
 
 Format: `todo [Description]`
 * Add a Todo type task into task manager.
@@ -44,8 +74,8 @@ ________________________________________________________________________________
 ```
 
 
-### Adding a Deadline task `deadline`
-This will add a deadline task to the task list
+### Add a Deadline task `deadline`
+Adds a deadline task to the task list
 
 Format: `deadline [Description] /by [Due Date]`
 * Add a Deadline type task into task manager.
@@ -72,8 +102,8 @@ ________________________________________________________________________________
 __________________________________________________________________________________________
 ```
 
-### Adding an Event task `event`
-This will add an event task to the task list
+### Add an Event task `event`
+Adds an event task to the task list
 
 Format: `event [Description] /at [Event Date]`
 * Add a Event type task into task manager.
@@ -100,8 +130,8 @@ ________________________________________________________________________________
 __________________________________________________________________________________________
 ```
 
-### Listing all Tasks `list`
-List all tasks in the task manager
+### List all Tasks `list`
+Shows a list of all tasks in the task manager
 
 Format: `list`
 
@@ -121,8 +151,8 @@ ________________________________________________________________________________
 __________________________________________________________________________________________
 ```
 
-### Completing a Task `done`
-Mark a task in task manager as completed
+### Complete a Task `done`
+Marks a task in task manager as completed
 
 Format: `done [Task Index]`
 * Set the Task in task manager with the index as done.
@@ -141,8 +171,8 @@ ________________________________________________________________________________
 __________________________________________________________________________________________
 ```
 
-### Deleting a Task `delete`
-Remove a task from the task list
+### Delete a Task `delete`
+Deletes a task from the task list
 
 Format: `delete [Task Index]`
 * Delete the task at Task Index
@@ -160,9 +190,9 @@ ________________________________________________________________________________
 __________________________________________________________________________________________
 ```
 
-### Finding Task `find`
+### Find Task `find`
 #### Find by Keyword
-Searches and prints all tasks that has the search string in the task name
+Searches and prints all tasks that has the search string in the task description
 
 Format: `find [Search Phrase]`
 * Find all task with description containing search phrase.
@@ -197,7 +227,7 @@ ________________________________________________________________________________
 ```
 
 #### Find between Dates
-Searches and prints all tasks that is between start date and end date
+Searches and prints all tasks that falls between the start date and end date
 
 Format: `find [Start Date] /to [End date]`
 * Find all task between start date and end date.
@@ -214,7 +244,7 @@ ________________________________________________________________________________
 __________________________________________________________________________________________
 ```
 
-### Exiting the program `bye`
+### Exit the program `bye`
 Terminates the program gracefully
 
 Format: `bye`
