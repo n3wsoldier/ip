@@ -2,8 +2,6 @@
 Duke is an offline desktop app for managing tasks via a Command Line Interface (CLI).
 
 ## Table of Contents
-
-## Table of Contents
 * [Quick Start](#quick-start)
 * [Features](#features)
     * [Task Management](#task-management)
