@@ -30,7 +30,7 @@ public class Messages {
             "due time"
             +LS
             +" Use the \"help\" command for more information";
-    public static final String MESSAGE_NUMBER_INVALID = " ☹ OOPS!!! Deadline/Done should be accompanied by a number"
+    public static final String MESSAGE_NUMBER_INVALID = " ☹ OOPS!!! Delete/Done should be accompanied by a number"
             +LS
             +" Use the \"help\" command for more information";
     public static final String MESSAGE_INVALID_COMMAND_ERROR = " ☹ OOPS!!! I'm sorry,"
