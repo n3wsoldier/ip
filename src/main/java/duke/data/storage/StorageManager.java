@@ -37,16 +37,8 @@ public class StorageManager {
      */
     public StorageManager(String fileName){
         this.dataFile = new File(prepareFile(fileName));
-        try{
-            if (!dataFile.getParentFile().exists()) {
-                dataFile.getParentFile().mkdirs();
-            }
-
-            if (!dataFile.exists()) {
-                dataFile.createNewFile();
-            }
-        }catch (IOException e){
-            System.out.println("Cannot create file; reason: " + e.getMessage());
+        if (!dataFile.getParentFile().exists()) {
+            dataFile.getParentFile().mkdirs();
         }
 
     }

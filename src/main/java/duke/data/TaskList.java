@@ -61,8 +61,13 @@ public class TaskList {
      * @param tasksIndex
      */
     public void deleteTask(int tasksIndex){
-        completedTask--;
+
+        if(tasks.get(tasksIndex).isDone()){
+            completedTask--;
+
+        }
         tasks.remove(tasksIndex);
+
     }
 
     /***

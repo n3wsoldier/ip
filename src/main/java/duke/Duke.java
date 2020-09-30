@@ -71,8 +71,10 @@ public class Duke {
                 ui.printInvalidCommandMessage();
             }catch (DescriptionEmptyException e){
                 ui.printEmptyDescriptionMessage();
-            }catch (DueTimeEmptyException e){
+            }catch (DueTimeEmptyException e) {
                 ui.printInvalidDescriptionMessage();
+            }catch (NumberFormatException e){
+                ui.printInvalidNumber();
             } finally {
                 ui.showLine();
             }

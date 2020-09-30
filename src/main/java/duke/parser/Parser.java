@@ -21,7 +21,7 @@ public class Parser {
      * @throws DueTimeEmptyException
      */
     public Command executeCommand(String userCommand) throws InvalidCommandException,
-            DescriptionEmptyException, DueTimeEmptyException{
+            DescriptionEmptyException, DueTimeEmptyException, NumberFormatException{
         //inputs[0] = command
         //inputs[1] = arguments
         String[] inputs = splitInput(userCommand.trim(), " ");
@@ -53,6 +53,8 @@ public class Parser {
             throw new DueTimeEmptyException();
         }catch (ArrayIndexOutOfBoundsException e){
             throw new DescriptionEmptyException();
+        }catch (NumberFormatException e){
+            throw e;
         }
     }
 
@@ -94,9 +96,13 @@ public class Parser {
      * @param args
      * @return
      */
-    private Command prepareDoneCommand(String args) {
-        int tasksIndex = Integer.parseInt(args) -1;
-        return new DoneCommand(tasksIndex);
+    private Command prepareDoneCommand(String args) throws NumberFormatException{
+        try {
+            int tasksIndex = Integer.parseInt(args) - 1;
+            return new DoneCommand(tasksIndex);
+        }catch (NumberFormatException e){
+            throw new NumberFormatException();
+        }
     }
 
     /***
@@ -105,9 +111,13 @@ public class Parser {
      * @param args
      * @return
      */
-    private Command prepareDeleteCommand(String args) {
-        int tasksIndex = Integer.parseInt(args) -1;
-        return new DeleteCommand(tasksIndex);
+    private Command prepareDeleteCommand(String args) throws NumberFormatException{
+        try{
+            int tasksIndex = Integer.parseInt(args) -1;
+            return new DeleteCommand(tasksIndex);
+        }catch (NumberFormatException e){
+            throw new NumberFormatException();
+        }
     }
 
     /***

@@ -54,6 +54,11 @@ public class Event extends Task implements DateTimeValidator{
         return "[E]" + super.toString() + " (at: " + (isDateTime() ? dateToString.format(atDate) : at) + ")";
     }
 
+    /***
+     * Parse the at time field to date if possible
+     * else set isDateString to false;
+     * @param input
+     */
     @Override
     public void parseToDate(String input) {
         try {
@@ -65,6 +70,10 @@ public class Event extends Task implements DateTimeValidator{
 
     }
 
+    /***
+     * Return true if the the due date is proper date format
+     * @return
+     */
     @Override
     public boolean isDateTime(){
         return isDateString;

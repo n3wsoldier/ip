@@ -88,4 +88,6 @@ delete 9
 delete 10
 list
 done 1
+done -1
+delete -1
 bye

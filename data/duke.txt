@@ -1,9 +1,0 @@
-D | 1 | test | 123
-D | 1 | read book | 23/09/2020 2359
-D | 1 | test2 | test2
-E | 1 | test3 | test3
-T | 1 | read book
-D | 0 | CS2113T Userguide | 2/10/2020 2359
-E | 0 | Sister Birthday | Next Saturday
-E | 0 | CS2101 OP2 presentaion | 25/10/2020 1200
-D | 0 | CS2113T IP | Friday

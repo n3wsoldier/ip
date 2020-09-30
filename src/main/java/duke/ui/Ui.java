@@ -145,6 +145,13 @@ public class Ui {
     }
 
     /***
+     * print invalid number for commands like done and delete
+     */
+    public void printInvalidNumber(){
+        System.out.println(Messages.MESSAGE_NUMBER_INVALID);
+    }
+
+    /***
      * print file loading error
      */
     public void printLoadingError(){

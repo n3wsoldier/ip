@@ -1,13 +1,47 @@
-T | 1 | back spaces test
 D | 1 | back spaces test | 1/1/2020 2359
-D | 1 | wrong date test | 0/0/2020
 D | 1 | wrong Time test | 1/1/2020 2459
-E | 1 | front spaces test | 1/1/2020 2359
 E | 1 | no time test | 1/1/2020
-E | 1 | wrong month test | 2/14/2020
 E | 1 | wrong Time test2 | 1/1/2020 830
-T | 1 | read Peter pan
 T | 1 | read Harry Potter and the Philosopher's Stone
+D | 1 | return Peter pan | 1/2/2020 0159
+D | 1 | return Harry Potter and the Philosopher's Stone | 1/4/2020 2339
+D | 1 | test2 Peter pan | 1/2/2020 2059
+D | 1 | test4 | 1/4/2020 2359
+D | 1 | t3st2 Peter pan | 18/2/2020 2359
+D | 0 | t3st3 | 21/2/2020 2359
+D | 0 | t3st4 | 29/1/2020 2359
+E | 0 | test5 | 1/1/2020 0830
+E | 0 | test6 Peter pan | 2/2/2020 2059
+E | 0 | test7 | 4/3/2020 0000
+E | 0 | test8 | 15/4/2020 2359
+E | 0 | test10 Peter pan | 2/2/2020 2059
+E | 0 | test11 | 3/3/2020 0000
+E | 0 | test12 | 14/4/2020 2359
+E | 0 | t3st9 | 12/1/2020 0619
+E | 0 | t3st10 Peter pan | 18/2/2020 2048
+E | 0 | t3st11 | 21/2/2020 2058
+E | 0 | t3st12 | 29/1/2020 2359
+E | 0 | project meeting | Aug 6th 2-4pm
+T | 0 | front spaces test
+T | 0 | back spaces test
+D | 0 | front spaces test | 1/1/2020 2359
+D | 0 | back spaces test | 1/1/2020 2359
+D | 0 | no time test | 1/1/2020
+D | 0 | wrong date test | 0/0/2020
+D | 0 | wrong month test | 2/14/2020
+D | 0 | wrong Time test | 1/1/2020 2459
+D | 0 | wrong Time test2 | 1/1/2020 830
+E | 0 | front spaces test | 1/1/2020 2359
+E | 0 | back spaces test | 1/1/2020 2359
+E | 0 | no time test | 1/1/2020
+E | 0 | wrong date test | 0/0/2020
+E | 0 | wrong month test | 2/14/2020
+E | 0 | wrong Time test | 1/1/2020 2459
+E | 0 | wrong Time test2 | 1/1/2020 830
+T | 0 | read Frankenstein
+T | 0 | read Peter pan
+T | 0 | read Moby Dick or The Whale
+T | 0 | read Harry Potter and the Philosopher's Stone
 D | 0 | return Frankenstein | 1/1/2020 2359
 D | 0 | return Peter pan | 1/2/2020 0159
 D | 0 | return Moby Dick or The Whale | 1/3/2020 1259
