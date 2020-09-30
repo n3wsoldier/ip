@@ -25,9 +25,9 @@ Duke is an offline desktop app for managing tasks via a Command Line Interface (
 
 ## Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest `Duke.jar` from [here.]()
+2. Download the latest `Duke.jar` from [here.](https://github.com/n3wsoldier/ip/releases/tag/A-Release)
 3. Copy the file to the folder you want to use as the home folder for your Duke.
-4. Use command prompt to run the `Duke.jar` and you are ready.
+4. Use command prompt to run the `java -jar Duke.jar` and you are ready to use Duke.
 
 ```
 ____________________________________________________________
@@ -278,8 +278,8 @@ Format: `help`
 | Help                          | `help` | 
 
 ## FAQ
-Q: Where does Duke store my save file?
+Q: Where does Duke store my save file?<br>
 A: It will create a data/duke.txt in the directory that duke is running.
 
-Q: How to export and import saved file?
+Q: How to export and import saved file?<br>
 A: Find the saved file data/duke.txt and copy it out. To import, simply place the duke.txt back in the data folder.
