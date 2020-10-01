@@ -10,7 +10,7 @@ public class DoneCommand extends Command{
 
     private int toDone;
 
-    /***
+    /**
      * DoneCommand constructor using int values.
      * @param doneIndex : task index to set as done
      */
@@ -18,9 +18,9 @@ public class DoneCommand extends Command{
         toDone = doneIndex;
     }
 
-    /***
+    /**
      * Execute Done command: set task as done
-     * Print Task done added Message
+     * Print Task done added Message, print error message when task not within list
      * Update save file
      * @param tasks : TaskList object with list available function
      * @param ui : ui user interaction/interface related function (printing messages)

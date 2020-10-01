@@ -12,7 +12,7 @@ public abstract class Command {
      */
     public abstract void execute(TaskList tasks, Ui ui, StorageManager storage);
 
-    /***
+    /**
      * isExit return boolean to check if the program is exiting
      * False by default but override by ExitCommand
      * @return

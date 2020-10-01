@@ -8,7 +8,7 @@ public class HelpCommand extends Command{
 
     public static final String COMMAND_HELP = "help";
 
-    /***
+    /**
      * Print Help message
      * @param tasks : TaskList object with list available function
      * @param ui : ui user interaction/interface related function (printing messages)

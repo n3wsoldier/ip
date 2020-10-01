@@ -14,7 +14,7 @@ public class Ui {
     private final Scanner SCANNER = new Scanner(System.in);
     private static SimpleDateFormat dateToString = new SimpleDateFormat("dd MMM yyyy hh:mmaa");
 
-    /***
+    /**
      * Gets the next line input from the user
      * @return input by the user
      */
@@ -22,7 +22,7 @@ public class Ui {
         return SCANNER.nextLine();
     }
 
-    /***
+    /**
      * Print Intro message
      */
     public void showWelcome(){
@@ -30,14 +30,14 @@ public class Ui {
         System.out.println(Messages.MESSAGE_INTRO);
     }
 
-    /***
+    /**
      * print loading messages
      */
     public void printLoadingMessage(){
         System.out.println(Messages.MESSAGE_LOADING);
     }
 
-    /***
+    /**
      * print number of task loaded and loaded message
      * @param tasksSize
      */
@@ -45,14 +45,14 @@ public class Ui {
         System.out.println(" "+tasksSize+ Messages.MESSAGE_LOADED);
     }
 
-    /***
+    /**
      * print line of _
      */
     public void showLine(){
         System.out.println(Messages.MESSAGE_LINE);
     }
 
-    /***
+    /**
      * Print message when a new task is added into task manager
      * @param taskToString: toString of of task
      * @param numberOfTasks: the numberOfTasks
@@ -63,7 +63,7 @@ public class Ui {
         System.out.println(" Now you have "+ numberOfTasks +" tasks in the list.");
     }
 
-    /***
+    /**
      * list the task within the task manager
      */
     public void printTaskList(TaskList tasks, int totalTask, int completedTask){
@@ -73,9 +73,11 @@ public class Ui {
         }
     }
 
-    /***
+    /**
      * Print task done message
-     * @param taskToString: toString of the task
+     * @param taskToString : the task to be deleted
+     * @param totalTask : total tasklist size
+     * @param completedTask : completed task size
      */
     public static void printTaskDoneMessage(String taskToString, int totalTask, int completedTask){
         System.out.println(Messages.MESSAGE_DONE);
@@ -84,9 +86,11 @@ public class Ui {
                 (totalTask - completedTask) + " left :)" );
     }
 
-    /***
+    /**
      * Print task done message
-     * @param taskToString: toString of the task
+     * @param taskToString : the task to be deleted
+     * @param totalTask : total tasklist size
+     * @param completedTask : completed task size
      */
     public static void printTaskAlreadyDoneMessage(String taskToString, int totalTask, int completedTask){
         System.out.println(Messages.MESSAGE_ALREADY_DONE);
@@ -95,25 +99,26 @@ public class Ui {
                 (totalTask - completedTask) + " left :)" );
     }
 
-    /***
-     * Print delete message
-     * @param size : remaining size
+    /**
+     * Print task Delete message
      * @param toString : the task to be deleted
+     * @param totalTask : total tasklist size
+     * @param completedTask : completed task size
      */
-    public static void printTaskDeleteMessage( String toString, int completedTask, int totalTask){
+    public static void printTaskDeleteMessage( String toString, int totalTask , int completedTask){
         System.out.println(Messages.MESSAGE_DELETE);
         System.out.println("   "+toString);
         System.out.println(" Now you have "+ completedTask +"/"+ totalTask +" completed tasks in the list.");
     }
 
-    /***
+    /**
      * Print help messages with format and example
      */
     public static void printHelpMessage(){
         System.out.println(Messages.MESSAGE_HELP);
     }
 
-    /***
+    /**
      * Print Exit message
      */
     public static void printExitMessage(){

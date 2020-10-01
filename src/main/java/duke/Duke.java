@@ -20,7 +20,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    /***
+    /**
      * Main Method to initialise Duke and run it
      * @param args
      */
@@ -28,8 +28,9 @@ public class Duke {
         new Duke("/data/duke.txt").run();
     }
 
-    /***
+    /**
      * Loads from save file if exist else create new tasklist
+     * Handle any file exception
      * @param fileName : file path of saved data
      */
     public Duke(String fileName) {
@@ -51,7 +52,7 @@ public class Duke {
         }
     }
 
-    /***
+    /**
      * Looped to read usercommand
      * parse and execute command
      * Exit when the ExitCommand is executed

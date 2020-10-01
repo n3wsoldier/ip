@@ -8,7 +8,7 @@ public class Deadline extends Task implements DateTimeValidator {
     protected boolean isDateString;
     protected Date byDate;
 
-    /***
+    /**
      * Deadline constructor, use Task constructor
      * @param description : Description of task
      * @param by : Due date of task
@@ -21,7 +21,7 @@ public class Deadline extends Task implements DateTimeValidator {
         parseToDate(by);
     }
 
-    /***
+    /**
      * Return the due date (by)
      * @return
      */
@@ -29,7 +29,7 @@ public class Deadline extends Task implements DateTimeValidator {
         return by;
     }
 
-    /***
+    /**
      * Modify the due date (by)
      * @param by
      */
@@ -37,7 +37,7 @@ public class Deadline extends Task implements DateTimeValidator {
         this.by = by;
     }
 
-    /***
+    /**
      * Get due date
      * @return
      */
@@ -45,7 +45,7 @@ public class Deadline extends Task implements DateTimeValidator {
         return this.byDate;
     }
 
-    /***
+    /**
      * Format the way to print Deadline task
      * @return
      */
@@ -54,7 +54,7 @@ public class Deadline extends Task implements DateTimeValidator {
         return "[D]" + super.toString() + " (by: " + (isDateTime() ? dateToString.format(byDate) : by) + ")";
     }
 
-    /***
+    /**
      * Parse the at time field to date if possible
      * else set isDateString to false;
      * @param input
@@ -70,7 +70,7 @@ public class Deadline extends Task implements DateTimeValidator {
 
     }
 
-    /***
+    /**
      * Return true if the the due date is proper date format
      * @return
      */

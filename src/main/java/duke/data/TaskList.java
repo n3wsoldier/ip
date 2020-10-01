@@ -17,7 +17,7 @@ public class TaskList {
     public  ArrayList<Task> tasks ;
     private int completedTask;
 
-    /***
+    /**
      * Create Tasklist with saved TaskList
      * @param tasks
      */
@@ -26,7 +26,7 @@ public class TaskList {
         this.completedTask = countCompletedTask();
     }
 
-    /***
+    /**
      * Create empty TaskList
      */
     public TaskList(){
@@ -34,7 +34,7 @@ public class TaskList {
         completedTask = 0;
     }
 
-    /***
+    /**
      * Count the number of completed task
      * @return completeTask
      */
@@ -48,7 +48,7 @@ public class TaskList {
         return completeTask;
     }
 
-    /***
+    /**
      * Get completed task
      * @return completedTask
      */
@@ -56,7 +56,7 @@ public class TaskList {
         return completedTask;
     }
 
-    /***
+    /**
      * Delete a task from TaskList
      * @param tasksIndex
      */
@@ -70,9 +70,10 @@ public class TaskList {
 
     }
 
-    /***
+    /**
      * Set task with TaskIndex in Tasklist as done
      * @param tasksIndex
+     * @return : True if successfull else false when already marked
      */
     public boolean setTaskDone(int tasksIndex){
         if(tasks.get(tasksIndex).isDone()){
@@ -84,7 +85,7 @@ public class TaskList {
         }
     }
 
-    /***
+    /**
      * Add a Task object into TaskList
      * @param task : To-do/Deadline/Event
      */
@@ -92,7 +93,7 @@ public class TaskList {
         tasks.add(task);
     }
 
-    /***
+    /**
      * Size of the TaskList
      * @return
      */
@@ -100,7 +101,7 @@ public class TaskList {
         return tasks.size();
     }
 
-    /***
+    /**
      * Get the Task object form the TaskList
      * @param index : TaskIndex of the TaskList
      * @return
@@ -109,7 +110,7 @@ public class TaskList {
         return tasks.get(index);
     }
 
-    /***
+    /**
      * toString function to convert TaskList into Savable dataItems
      * @return full save file content
      */
@@ -135,10 +136,10 @@ public class TaskList {
         return saveContent;
     }
 
-    /***
+    /**
      * Return list with task that description have search phrase
      * @param search : Keyword to search for in description
-     * @return
+     * @return : arraylist of task that match search term
      */
     public ArrayList<Task> find(String search){
         ArrayList<Task> searchList = new ArrayList<>();
@@ -152,10 +153,10 @@ public class TaskList {
         return searchList;
     }
 
-    /***
+    /**
      * Return list with task that due date have the search date
      * @param searchDate : Keyword to search for in description
-     * @return
+     * @return : arraylist of task that match search date
      */
     public ArrayList<Task> find(Date searchDate){
         ArrayList<Task> searchList = new ArrayList<>();
@@ -169,12 +170,12 @@ public class TaskList {
         return searchList;
     }
 
-    /***
+    /**
      * Return list with task that due date is after the start date and before the end date
      * or either of the date
      * @param startDate : Keyword to search for in description
      * @param endDate : Keyword to search for in description
-     * @return
+     * @return : arraylist of task that falls between start date and end date
      */
     public ArrayList<Task> find(Date startDate, Date endDate){
         ArrayList<Task> searchList = new ArrayList<>();

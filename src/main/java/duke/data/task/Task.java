@@ -9,7 +9,7 @@ public class Task {
     protected TaskType taskType;
 
 
-    /***
+    /**
      * Task Constructor to be called by all subclass
      * Newly created task by default not done
      * @param description : Description of task
@@ -21,7 +21,7 @@ public class Task {
         this.taskType = taskType;
     }
 
-    /***
+    /**
      * Return tick or x symbols base on isDone value
      * @return
      */
@@ -29,14 +29,14 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    /***
+    /**
      * maskAsDone to mark task as done using isDone boolean
      */
     public void markAsDone(){
         isDone = true;
     }
 
-    /***
+    /**
      * return the boolean isDone
      * @return
      */
@@ -44,7 +44,7 @@ public class Task {
         return this.isDone;
     }
 
-    /***
+    /**
      * Get the description of a task
      * @return
      */
@@ -52,7 +52,7 @@ public class Task {
         return description;
     }
 
-    /***
+    /**
      * Return false by default unless deadline and Event have date duedate
      * @return
      */
@@ -60,7 +60,7 @@ public class Task {
         return false;
     }
 
-    /***
+    /**
      * Return null by default unless deadline and Event have date duedate
      * @return
      */
@@ -68,7 +68,7 @@ public class Task {
         return null;
     }
 
-    /***
+    /**
      * Get the status icon and description of task
      * Will be build on by subclasses
      * @return

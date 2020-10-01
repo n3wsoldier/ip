@@ -8,7 +8,7 @@ public class ListCommand extends Command{
 
     public static final String COMMAND_LIST = "list";
 
-    /***
+    /**
      * List task command
      * @param tasks : TaskList object with list available function
      * @param ui : ui user interaction/interface related function (printing messages)

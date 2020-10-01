@@ -8,7 +8,7 @@ public class ExitCommand extends Command{
 
     public static final String COMMAND_EXIT = "bye";
 
-    /***
+    /**
      * Print Exit Message
      * Save the current tasklist
      * @param tasks : TaskList object with list available function
@@ -21,7 +21,7 @@ public class ExitCommand extends Command{
         storage.save(tasks.toString());
     }
 
-    /***
+    /**
      * isExit function to set true to exiting
      * @return true to isExit
      */

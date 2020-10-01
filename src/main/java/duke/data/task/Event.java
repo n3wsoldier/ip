@@ -8,7 +8,7 @@ public class Event extends Task implements DateTimeValidator{
     protected boolean isDateString;
     protected Date atDate;
 
-    /***
+    /**
      * Deadline constructor, use Task constructor
      * @param description : Description of task
      * @param at : Due date of task
@@ -21,7 +21,7 @@ public class Event extends Task implements DateTimeValidator{
         parseToDate(at);
     }
 
-    /***
+    /**
      * Return the due date (at)
      * @return
      */
@@ -29,7 +29,7 @@ public class Event extends Task implements DateTimeValidator{
         return at;
     }
 
-    /***
+    /**
      * Modify the due date (at)
      * @param at
      */
@@ -37,7 +37,7 @@ public class Event extends Task implements DateTimeValidator{
         this.at = at;
     }
 
-    /***
+    /**
      * Get due date
      * @return
      */
@@ -45,7 +45,7 @@ public class Event extends Task implements DateTimeValidator{
         return this.atDate;
     }
 
-    /***
+    /**
      * Format the way to print Event task
      * @return
      */
@@ -54,7 +54,7 @@ public class Event extends Task implements DateTimeValidator{
         return "[E]" + super.toString() + " (at: " + (isDateTime() ? dateToString.format(atDate) : at) + ")";
     }
 
-    /***
+    /**
      * Parse the at time field to date if possible
      * else set isDateString to false;
      * @param input
@@ -70,7 +70,7 @@ public class Event extends Task implements DateTimeValidator{
 
     }
 
-    /***
+    /**
      * Return true if the the due date is proper date format
      * @return
      */

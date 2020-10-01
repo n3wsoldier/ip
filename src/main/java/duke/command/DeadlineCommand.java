@@ -11,7 +11,7 @@ public class DeadlineCommand extends Command{
 
     private Deadline toAdd;
 
-    /***
+    /**
      * DeadlineCommand constructor using string values.
      * @param description : description of task
      * @param by : deadline of task
@@ -20,7 +20,7 @@ public class DeadlineCommand extends Command{
         this.toAdd = new Deadline(description,by);
     }
 
-    /***
+    /**
      * Execute Deadline command: Add deadline tasktype into tasklist
      * Print Deadline added Message
      * Update save file

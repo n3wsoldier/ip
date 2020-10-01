@@ -17,7 +17,7 @@ public class FindCommand extends Command implements DateTimeValidator {
     private Date startDate;
     private Date endDate;
 
-    /***
+    /**
      * FindCommand constructor using string values.
      * @param search : description of task
      */
@@ -29,7 +29,7 @@ public class FindCommand extends Command implements DateTimeValidator {
 
 
 
-    /***
+    /**
      * Print task with search phrase
      * @param tasks : TaskList object with list available function
      * @param ui : ui user interaction/interface related function (printing messages)
@@ -47,7 +47,7 @@ public class FindCommand extends Command implements DateTimeValidator {
 
     }
 
-    /***
+    /**
      * Parse the toFind string if possible
      * @param input
      */

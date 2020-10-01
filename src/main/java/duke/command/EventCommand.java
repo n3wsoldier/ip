@@ -11,7 +11,7 @@ public class EventCommand extends Command{
 
     private Event toAdd;
 
-    /***
+    /**
      * DeadlineCommand constructor using string values.
      * @param description : description of task
      * @param at : deadline of task
@@ -20,7 +20,7 @@ public class EventCommand extends Command{
         this.toAdd = new Event(description,at);
     }
 
-    /***
+    /**
      * Execute Event command: Add event tasktype into tasklist
      * Print event added Message
      * Update save file

@@ -10,7 +10,7 @@ public class DeleteCommand extends Command{
 
     private int toDelete;
 
-    /***
+    /**
      * DoneCommand constructor using int values.
      * @param tasksIndex : task index to set as done
      */
@@ -18,9 +18,9 @@ public class DeleteCommand extends Command{
         toDelete = tasksIndex;
     }
 
-    /***
+    /**
      * Execute Delete command: Delete a task from tasklist
-     * Print task deleted Message
+     * Print task deleted Message, print error message when task not within list
      * Update save file
      * @param tasks : TaskList object with list available function
      * @param ui : ui user interaction/interface related function (printing messages)
@@ -32,7 +32,7 @@ public class DeleteCommand extends Command{
         try {
             String toString = tasks.get(toDelete).toString();
             tasks.deleteTask(toDelete);
-            Ui.printTaskDeleteMessage(toString, tasks.getCompletedTask(), tasks.size());
+            Ui.printTaskDeleteMessage(toString, tasks.size(), tasks.getCompletedTask());
             storage.save(tasks.toString());
         }catch (IndexOutOfBoundsException e){
             Ui.printIndexOutError("Delete");

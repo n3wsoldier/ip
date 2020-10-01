@@ -11,14 +11,16 @@ public class Parser {
     private final String PARAM_DELIMIT_BY = " /by ";
     private final String PARAM_DELIMIT_AT = " /at ";
 
-    /***
+    /**
      * executeCommand to parse user input to command and arguments
      * Call different prepare method further parse the arguments
+     * Create respective command class
      * @param userCommand
      * @return Command object that can be executed
-     * @throws InvalidCommandException
-     * @throws DescriptionEmptyException
-     * @throws DueTimeEmptyException
+     * @throws InvalidCommandException No such command
+     * @throws DescriptionEmptyException Commands that requires description cannot be empty
+     * @throws DueTimeEmptyException Deadline/Event cannot have empty due datetime
+     * @throws NumberFormatException Delete/Done cannot accept non-integer as argument
      */
     public Command executeCommand(String userCommand) throws InvalidCommandException,
             DescriptionEmptyException, DueTimeEmptyException, NumberFormatException{
@@ -58,7 +60,7 @@ public class Parser {
         }
     }
 
-    /***
+    /**
      * Parse the deadline arguments into description and by
      * Which is use to initialise DeadlineCommand
      * @param args
@@ -74,7 +76,7 @@ public class Parser {
         }
     }
 
-    /***
+    /**
      * Parse the event arguments into description and by
      * Which is use to initialise EventCommand
      * @param args
@@ -90,11 +92,12 @@ public class Parser {
         }
     }
 
-    /***
+    /**
      * Parse the argument into index format (int -1)
      * which is use to initialise DoneCommand
      * @param args
      * @return
+     * @throws NumberFormatException Done cannot accept non-integer as argument
      */
     private Command prepareDoneCommand(String args) throws NumberFormatException{
         try {
@@ -105,11 +108,12 @@ public class Parser {
         }
     }
 
-    /***
+    /**
      * Parse the argument into index format (int -1)
      * which is use to initialise DoneCommand
      * @param args
      * @return
+     * @throws NumberFormatException Delete cannot accept non-integer as argument
      */
     private Command prepareDeleteCommand(String args) throws NumberFormatException{
         try{
@@ -120,7 +124,7 @@ public class Parser {
         }
     }
 
-    /***
+    /**
      * Split input using delimiter
      * @param input : arguments to split
      * @param delimiter : what to split by

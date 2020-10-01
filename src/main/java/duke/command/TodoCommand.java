@@ -11,7 +11,7 @@ public class TodoCommand extends Command{
 
     private Todo  toAdd;
 
-    /***
+    /**
      * TodoCommand constructor using string values.
      * @param description : description of task
      */
@@ -19,7 +19,7 @@ public class TodoCommand extends Command{
         this.toAdd = new Todo(description);
     }
 
-    /***
+    /**
      * Execute To-do command: Add to-do tasktype into tasklist
      * Print to-do added Message
      * Update save file
